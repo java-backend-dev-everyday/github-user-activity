@@ -14,14 +14,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/*
-TODO:
-- [x] Add a feature to filter activity by event type (e.g., PushEvent, CreateEvent, etc.).
-- [x] Display the fetched activity in a more structured format for better readability.
-- [x] Implement caching for fetched data to improve performance and reduce repeated API calls.
-*/
-
-
 public class GithubAPI {
 
     public static final Map<String, Integer> eventCounter = new HashMap<>();
