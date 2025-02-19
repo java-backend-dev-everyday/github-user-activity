@@ -9,6 +9,17 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/*
+TODO:
+- Add a feature to filter activity by event type (e.g., PushEvent, CreateEvent, etc.).
+- Display the fetched activity in a more structured format for better readability.
+- Implement caching for fetched data to improve performance and reduce repeated API calls.
+- Explore other endpoints of the GitHub API to:
+  - Fetch additional information about the user (e.g., profile details, followers, etc.).
+  - Retrieve details about the user's repositories (e.g., stars, forks, etc.).
+*/
+
+
 public class GithubAPI {
     public static void main(String[] args) {
         String username = args[0];
@@ -40,13 +51,50 @@ public class GithubAPI {
                 JSONArray events = new JSONArray(response.toString());
                 for (int i = 0; i < events.length(); i++) {
                     JSONObject event = events.getJSONObject(i);
-                    System.out.println("Event: " + event.toString());
+                    parseEvent(event);
                 }
             } else {
                 System.out.println("GET request failed");
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void parseEvent(JSONObject event)
+    {
+        String eventType = event.getString("type");
+        JSONObject repo = event.getJSONObject("repo");
+        String repoName = repo.getString("name");
+        switch (eventType) {
+            case "PushEvent":
+                JSONObject payload = event.getJSONObject("payload");
+                int commitCount = payload.getJSONArray("commits").length(); // Liczba commitów
+                System.out.println("Pushed " + commitCount + " commits to repo " + repoName);
+                break;
+
+            case "CreateEvent":
+                String refType = event.getJSONObject("payload").getString("ref_type");
+                if (refType.equals("repository")) {
+                    System.out.println("Created repository: " + repoName);
+                } else if (refType.equals("branch")) {
+                    String branchName = event.getJSONObject("payload").getString("ref");
+                    System.out.println("Created branch " + branchName + " in repo " + repoName);
+                }
+                break;
+
+            case "IssuesEvent":
+                String action = event.getJSONObject("payload").getString("action");
+                if (action.equals("opened")) {
+                    System.out.println("Created issue in repo " + repoName);
+                } else if (action.equals("closed")) {
+                    System.out.println("Closed issue in repo " + repoName);
+                }
+                break;
+
+            default:
+                System.out.println("Event of type " + eventType + " in repo " + repoName);
+                break;
         }
     }
 }
