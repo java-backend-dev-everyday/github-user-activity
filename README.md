@@ -34,7 +34,7 @@ A project that analyzes GitHub user activity based on data fetched through the G
    ```
 
 3. Set up the environment:
-    - Ensure that **Java 17** or later is installed.
+    - Ensure that **Java 23** is installed.
     - Install **Maven**
 
 4. Build the project:
