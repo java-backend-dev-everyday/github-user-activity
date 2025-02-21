@@ -85,6 +85,7 @@ Contributions are welcome! To contribute:
 - [x] Implement caching for fetched data to improve performance and reduce repeated API calls.
 - [ ] Add testing
 - [ ] Add Spring Boot
+- [ ] Refactor for cleaner code
 
 ## 📜 License
 
