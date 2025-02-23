@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 public class GithubAPI {
 
     public static final Map<String, Integer> eventCounter = new HashMap<>();
-    private static final List<JSONObject> allEvents = new ArrayList<>();
+    public static final List<JSONObject> allEvents = new ArrayList<>();
 
     public static void main(String[] args) {
         String username = args[0];
@@ -194,10 +194,8 @@ public class GithubAPI {
 
     public static void printEventStatistics() {
         System.out.println("\n=== Event Statistics ===");
-        int index = 1;
         for (Map.Entry<String, Integer> entry : eventCounter.entrySet()) {
             System.out.println("Event Type: " + entry.getKey() + " | Count: " + entry.getValue());
-            index++;
         }
         System.out.println("=========================");
     }
