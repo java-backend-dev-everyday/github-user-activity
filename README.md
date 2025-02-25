@@ -2,7 +2,7 @@
 
 A project that analyzes GitHub user activity based on data fetched through the GitHub API. The project demonstrates key concepts such as basic API usage, JSON processing, data filtering, in-memory caching, date-time handling, and modular design.
 
-# ~B Build Status
+# 🏛️ Build Status
 
 ![CI/CD](https://github.com/java-backend-dev-everyday/github-user-activity/actions/workflows/maven.yml/badge.svg)
 
